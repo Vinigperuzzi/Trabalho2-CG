@@ -14,6 +14,15 @@ const fs = `#version 300 es
 
     //Daqui--------------------------------------------------
 
+
+    
+    // "ShaderToy Tutorial - Ray Marching for Dummies!" 
+// by Martijn Steinrucken aka BigWings/CountFrolic - 2018
+// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+//
+// This shader is part of a tutorial on YouTube
+// https://youtu.be/PGtv-dBi2wE
+
 #define MAX_STEPS 100
 #define MAX_DIST 100.
 #define SURF_DIST .01
