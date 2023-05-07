@@ -1,6 +1,6 @@
 "use strict";
 
-let audio = new Audio ('/Definitive/assets/musica/sound.mp3');
+let audio = new Audio ('/Definitive/assets/musica/audio.mp3');
 let tocando = false;
 
 function playAudio(){
