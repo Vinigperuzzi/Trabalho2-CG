@@ -1,18 +1,45 @@
 "use strict";
 
-let audio = new Audio ('/Definitive/assets/musica/audio.mp3');
-let tocando = false;
+let audio = new Audio ('/Definitive/assets/musica/audio2.mp3');
+let audio2 = new Audio ('/Definitive/assets/musica/audio.mp3');
+let tocando = 0;
+let frequencyData;
+let estouradao = 1.0;
 
 function playAudio(){
-    if (!tocando){
+    if (tocando != 1){
+      audio2.pause();
+      audio2.currentTime = 0;
       audio.play();
-      tocando = true;
+      tocando = 1;
     } else {
       audio.pause();
       audio.currentTime = 0;
-      tocando = false;
+      tocando = 0;
     }
 }
+
+function playAudio2(){
+  if (tocando != 2){
+    audio.pause();
+    audio.currentTime = 0;
+    audio2.play();
+    tocando = 2;
+  } else {
+    audio2.pause();
+    audio2.currentTime = 0;
+    tocando = 0;
+  }
+}
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const source = audioCtx.createMediaElementSource(audio);
+const analyser = audioCtx.createAnalyser();
+source.connect(analyser);
+analyser.connect(audioCtx.destination);
+analyser.fftSize = 2048;
+frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
 
 function main() {
   // Get A WebGL context
@@ -33,6 +60,10 @@ const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
 const resolutionLocation = gl.getUniformLocation(program, "iResolution");
 const mouseLocation = gl.getUniformLocation(program, "iMouse");
 const timeLocation = gl.getUniformLocation(program, "iTime");
+const corMarLocation = gl.getUniformLocation(program, "corMar");
+const corCeuLocation = gl.getUniformLocation(program, "corCeu");
+const alturaLocation = gl.getUniformLocation(program, "altura");
+const frequenciaLocation = gl.getUniformLocation(program, "frequencia");
 
 // Create a vertex array object (attribute state)
 const vao = gl.createVertexArray();
@@ -72,7 +103,7 @@ gl.vertexAttribPointer(
 const playpauseElem = document.querySelector('.playpause');
 const inputElem = document.querySelector('.divcanvas');
 inputElem.addEventListener('mouseover', requestFrame);
-inputElem.addEventListener('mouseout', cancelFrame);
+//inputElem.addEventListener('mouseout', cancelFrame);
 
 let mouseX = 0;
 let mouseY = 0;
@@ -114,6 +145,8 @@ function cancelFrame() {
 
 let then = 0;
 let time = 0;
+let timeForward = 0.0;
+
 function render(now) {
   requestId = undefined;
   now *= 0.001;  // convert to seconds
@@ -132,9 +165,45 @@ function render(now) {
   // Bind the attribute/buffer set we want.
   gl.bindVertexArray(vao);
 
+  let corMarNor;
+  let corCeuNor;
+  let alturaNor;
+  let freqNor;
+  analyser.getByteFrequencyData(frequencyData);
+  let frequency = frequencyData[100];
+
+  if(tocando == 0){
+      corMarNor = (mouseX/gl.canvas.width) * 2.5;
+      corCeuNor = (mouseX/gl.canvas.width) + 0.1;
+      alturaNor = (mouseY/gl.canvas.height) + 0.4;
+      freqNor = ((mouseY/gl.canvas.height)/10) + 0.10;
+      timeForward = 0.0;
+  } else if (tocando == 1){
+      corMarNor = 1-(frequency/200) * 2.5 * estouradao;
+      corCeuNor = 1-(frequency/200) + 0.1 * estouradao;
+      alturaNor = (frequency/200) + 0.4 * estouradao;
+      freqNor = ((frequency/200)/10) + 0.10 * estouradao;
+      timeForward = 0.0;
+  } else {
+    if (timeForward < 2){
+      timeForward += time*0.0005;
+    }
+    //Colocar os if's que trancam aqui
+      console.log(timeForward);
+      corMarNor = 2.5-(timeForward);
+      corCeuNor = 1.1-(timeForward/3);
+      alturaNor = (timeForward/10) + 0.4;
+      freqNor = (timeForward/10) + 0.10;
+  }
+
   gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
   gl.uniform2f(mouseLocation, mouseX, mouseY);
   gl.uniform1f(timeLocation, time);
+  gl.uniform1f(corMarLocation, corMarNor);
+  gl.uniform1f(corCeuLocation, corCeuNor);
+  gl.uniform1f(alturaLocation, alturaNor);
+  gl.uniform1f(frequenciaLocation, freqNor);
+  console.log(frequency);
 
   gl.drawArrays(
       gl.TRIANGLES,

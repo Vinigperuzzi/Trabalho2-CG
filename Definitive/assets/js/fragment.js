@@ -5,15 +5,18 @@ const fs = `#version 300 es
     uniform vec2 iMouse;
     uniform float iTime;
 
+    uniform float corMar;           //Torna a água mais escura (Multiplicador de 0.0 a 2.5)
+    uniform float corCeu;           //Torna o céu mais escuro (Multiplicador para menos de 0.1 a 1.1)
+    uniform float altura;           //Altura das ondas (0.2 a 1.2)
+    uniform float frequencia;       //Frequência das ondas (0.05 a 0.16)
+
+    //float mar = 1.0;            
+    float ceu = 1.1;            
+    float alt = 0.6;           
+    float freq = 0.10;          
+
     // we need to declare an output for the fragment shader
     out vec4 outColor;
-
-
-
-
-
-    //Daqui--------------------------------------------------
-
 
     
     /*
@@ -21,6 +24,8 @@ const fs = `#version 300 es
     * License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
     * Contact: tdmaav@gmail.com
     */
+
+    //Cena base: https://www.shadertoy.com/view/Ms2SD1
    
    const int NUM_STEPS = 8;
    const float PI	 	= 3.141592;
@@ -29,13 +34,13 @@ const fs = `#version 300 es
    #define AA
    
    // sea
-   const int ITER_GEOMETRY = 3;
-   const int ITER_FRAGMENT = 5;
-   const float SEA_HEIGHT = 0.6;
-   const float SEA_CHOPPY = 4.0;
+   const int ITER_GEOMETRY = 3;                         
+   const int ITER_FRAGMENT = 5;                         
+   const float SEA_HEIGHT = 1.0;                        
+   const float SEA_CHOPPY = 4.0;                
    const float SEA_SPEED = 0.8;
-   const float SEA_FREQ = 0.16;
-   const vec3 SEA_BASE = vec3(0.0,0.09,0.18);
+   const float SEA_FREQ = 1.0;                         
+   const vec3 SEA_BASE = vec3(0.0,0.09,0.18)*1.0;       
    const vec3 SEA_WATER_COLOR = vec3(0.8,0.9,0.6)*0.6;
    #define SEA_TIME (1.0 + iTime * SEA_SPEED)
    const mat2 octave_m = mat2(1.6,1.2,-1.2,1.6);
@@ -77,7 +82,7 @@ const fs = `#version 300 es
    // sky
    vec3 getSkyColor(vec3 e) {
        e.y = (max(e.y,0.0)*0.8+0.2)*0.8;
-       return vec3(pow(1.0-e.y,2.0), 1.0-e.y, 0.6+(1.0-e.y)*0.4) * 1.1;
+       return vec3(pow(1.0-e.y,2.0), 1.0-e.y, 0.6+(1.0-e.y)*0.4) * corCeu;     
    }
    
    // sea
@@ -90,8 +95,8 @@ const fs = `#version 300 es
    }
    
    float map(vec3 p) {
-       float freq = SEA_FREQ;
-       float amp = SEA_HEIGHT;
+       float freq = SEA_FREQ*frequencia;
+       float amp = SEA_HEIGHT*altura;
        float choppy = SEA_CHOPPY;
        vec2 uv = p.xz; uv.x *= 0.75;
        
@@ -107,8 +112,8 @@ const fs = `#version 300 es
    }
    
    float map_detailed(vec3 p) {
-       float freq = SEA_FREQ;
-       float amp = SEA_HEIGHT;
+       float freq = SEA_FREQ*frequencia;
+       float amp = SEA_HEIGHT*altura;
        float choppy = SEA_CHOPPY;
        vec2 uv = p.xz; uv.x *= 0.75;
        
@@ -128,12 +133,12 @@ const fs = `#version 300 es
        fresnel = min(pow(fresnel,3.0), 0.5);
            
        vec3 reflected = getSkyColor(reflect(eye,n));    
-       vec3 refracted = SEA_BASE + diffuse(n,l,80.0) * SEA_WATER_COLOR * 0.12; 
+       vec3 refracted = SEA_BASE*corMar + diffuse(n,l,80.0) * SEA_WATER_COLOR * 0.12; 
        
        vec3 color = mix(refracted,reflected,fresnel);
        
        float atten = max(1.0 - dot(dist,dist) * 0.001, 0.0);
-       color += SEA_WATER_COLOR * (p.y - SEA_HEIGHT) * 0.18 * atten;
+       color += SEA_WATER_COLOR * (p.y - SEA_HEIGHT*altura) * 0.18 * atten;
        
        color += vec3(specular(n,l,eye,60.0));
        
@@ -202,7 +207,7 @@ const fs = `#version 300 es
    
    // main
    void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
-       float time = iTime * 0.3 + iMouse.x*0.01;        //Desliga o iMouse para não usá-lo
+       float time = iTime * 0.3;       //Desliga o iMouse para não usá-lo
        
    #ifdef AA
        vec3 color = vec3(0.0);
@@ -221,11 +226,6 @@ const fs = `#version 300 es
        fragColor = vec4(pow(color,vec3(0.65)), 1.0);
    }
 
-
-
-
-
-    //Até aqui---------------------------------------------
 
     void main() {
       mainImage(outColor, gl_FragCoord.xy);
