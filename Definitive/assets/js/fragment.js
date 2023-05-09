@@ -8,12 +8,7 @@ const fs = `#version 300 es
     uniform float corMar;           //Torna a água mais escura (Multiplicador de 0.0 a 2.5)
     uniform float corCeu;           //Torna o céu mais escuro (Multiplicador para menos de 0.1 a 1.1)
     uniform float altura;           //Altura das ondas (0.2 a 1.2)
-    uniform float frequencia;       //Frequência das ondas (0.05 a 0.16)
-
-    //float mar = 1.0;            
-    float ceu = 1.1;            
-    float alt = 0.6;           
-    float freq = 0.10;          
+    uniform float frequencia;       //Frequência das ondas (0.05 a 0.16)      
 
     // we need to declare an output for the fragment shader
     out vec4 outColor;

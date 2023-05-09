@@ -5,6 +5,7 @@ let audio2 = new Audio ('/Definitive/assets/musica/audio.mp3');
 let tocando = 0;
 let frequencyData;
 let estouradao = 1.0;
+let timeForward = 0.0;
 
 function playAudio(){
     if (tocando != 1){
@@ -12,10 +13,12 @@ function playAudio(){
       audio2.currentTime = 0;
       audio.play();
       tocando = 1;
+      timeForward = 0.0;
     } else {
       audio.pause();
       audio.currentTime = 0;
       tocando = 0;
+      timeForward = 0.0;
     }
 }
 
@@ -25,10 +28,12 @@ function playAudio2(){
     audio.currentTime = 0;
     audio2.play();
     tocando = 2;
+    timeForward = 0.0;
   } else {
     audio2.pause();
     audio2.currentTime = 0;
     tocando = 0;
+    timeForward = 0.0;
   }
 }
 
@@ -145,7 +150,6 @@ function cancelFrame() {
 
 let then = 0;
 let time = 0;
-let timeForward = 0.0;
 
 function render(now) {
   requestId = undefined;
@@ -182,11 +186,12 @@ function render(now) {
       corMarNor = 1-(frequency/200) * 2.5 * estouradao;
       corCeuNor = 1-(frequency/200) + 0.1 * estouradao;
       alturaNor = (frequency/200) + 0.4 * estouradao;
-      freqNor = ((frequency/200)/10) + 0.10 * estouradao;
+      freqNor = 0.16;
+      //freqNor = ((frequency/200)/10) + 0.10 * estouradao;
       timeForward = 0.0;
   } else {
     if (timeForward < 2){
-      timeForward += time*0.0005;
+      timeForward += elapsedTime*0.05;
     }
     //Colocar os if's que trancam aqui
       console.log(timeForward);
