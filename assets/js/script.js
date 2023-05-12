@@ -1,7 +1,7 @@
 "use strict";
 
-let audio = new Audio ('/Definitive/assets/musica/audio2.mp3');
-let audio2 = new Audio ('/Definitive/assets/musica/audio.mp3');
+let audio = new Audio ('/assets/musica/audio2.mp3');
+let audio2 = new Audio ('/assets/musica/audio.mp3');
 let tocando = 0;
 let frequencyData;
 let estouradao = 1.0;
