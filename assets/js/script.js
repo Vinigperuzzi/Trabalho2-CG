@@ -7,6 +7,7 @@ let frequencyData;
 let estouradao = 1.0;
 let timeForward = 0.0;
 
+
 function playAudio(){
     if (tocando != 1){
       audio2.pause();
@@ -194,7 +195,6 @@ function render(now) {
       timeForward += elapsedTime*0.05;
     }
     //Colocar os if's que trancam aqui
-      console.log(timeForward);
       corMarNor = 2.5-(timeForward);
       corCeuNor = 1.1-(timeForward/3);
       alturaNor = (timeForward/10) + 0.4;
@@ -208,7 +208,6 @@ function render(now) {
   gl.uniform1f(corCeuLocation, corCeuNor);
   gl.uniform1f(alturaLocation, alturaNor);
   gl.uniform1f(frequenciaLocation, freqNor);
-  console.log(frequency);
 
   gl.drawArrays(
       gl.TRIANGLES,
