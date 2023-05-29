@@ -1,5 +1,8 @@
 "use strict";
 alert("Clique em qualquer lugar da tela para começar, e então mexa o mouse!\nTambém há os botões de música à direita, experimente!!");
+
+let instructionPhrase = document.querySelector('#sub');
+instructionPhrase.innerHTML = 'Clique em qualquer lugar da tela agora e mexa o mouse para controlar as ondas e a iluminação';
   
 let audio = new Audio ('./assets/musica/audio2.mp3');
 let audio2 = new Audio ('./assets/musica/audio.mp3');
@@ -40,6 +43,8 @@ if (tocando != 2){
 
 
 function runAll(){
+  let instructionPhrase = document.querySelector('#sub');
+  instructionPhrase.innerHTML = 'Mexa o mouse para movimentar o mar';
   
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const source = audioCtx.createMediaElementSource(audio);
@@ -112,12 +117,13 @@ function runAll(){
     const playpauseElem = document.querySelector('.playpause');
     const inputElem = document.querySelector('.divcanvas');
     let testRequest = false;
-    inputElem.addEventListener('mousemove', requestFrame);
+    inputElem.addEventListener('mousemove', testRequestFun);
     //inputElem.addEventListener('mouseout', cancelFrame);
 
     function testRequestFun(){
       if(!testRequest){
         testRequest = true;
+        instructionPhrase.innerHTML = 'Ray-Marching no WebGL2';
         requestFrame();
       }
     }
