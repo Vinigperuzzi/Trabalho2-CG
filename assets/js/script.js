@@ -41,14 +41,7 @@ function playAudio2(){
   }
 }
 
-let testeRunAll = false;
-
 function runAll(){
-  if (!testeRunAll){
-    let instructionPhrase = document.querySelector('#sub');
-    instructionPhrase.innerHTML = 'Mexa o mouse para movimentar o mar';
-    testeRunAll = true;
-  }
   
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const source = audioCtx.createMediaElementSource(audio);
