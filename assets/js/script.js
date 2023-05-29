@@ -27,24 +27,28 @@ function playAudio(){
 }
 
 function playAudio2(){
-if (tocando != 2){
-  audio.pause();
-  audio.currentTime = 0;
-  audio2.play();
-  tocando = 2;
-  timeForward = 0.0;
-} else {
-  audio2.pause();
-  audio2.currentTime = 0;
-  tocando = 0;
-  timeForward = 0.0;
-}
+  if (tocando != 2){
+    audio.pause();
+    audio.currentTime = 0;
+    audio2.play();
+    tocando = 2;
+    timeForward = 0.0;
+  } else {
+    audio2.pause();
+    audio2.currentTime = 0;
+    tocando = 0;
+    timeForward = 0.0;
+  }
 }
 
+let testeRunAll = false;
 
 function runAll(){
-  let instructionPhrase = document.querySelector('#sub');
-  instructionPhrase.innerHTML = 'Mexa o mouse para movimentar o mar';
+  if (!testeRunAll){
+    let instructionPhrase = document.querySelector('#sub');
+    instructionPhrase.innerHTML = 'Mexa o mouse para movimentar o mar';
+    testeRunAll = true;
+  }
   
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const source = audioCtx.createMediaElementSource(audio);
