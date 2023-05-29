@@ -83,7 +83,7 @@ canvas {
   z-index: 1;
   margin-top: 10vh;
   margin-left: calc(100% - 150px);
-  background-image: url(/assets/images/foneR.png);
+  background-image: url(../images/foneR.png);
 }
 
 #audio-img2{
@@ -93,7 +93,7 @@ height: 150px;
 z-index: 1;
 margin-top: 40vh;
 margin-left: calc(100% - 150px);
-background-image: url(/assets/images/foneR.png);
+background-image: url(../images/foneR.png);
 }
 
 #audio-img:hover, #audio-img2:hover{
