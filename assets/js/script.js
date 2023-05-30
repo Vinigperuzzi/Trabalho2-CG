@@ -1,8 +1,8 @@
 "use strict";
-alert("Clique em qualquer lugar da tela para começar, e então mexa o mouse!\nTambém há os botões de música à direita, experimente!!");
+alert("Clique no título para começar, e então mexa o mouse!\nTambém há os botões de música à direita, experimente!!");
 
 let instructionPhrase = document.querySelector('#sub');
-instructionPhrase.innerHTML = 'Clique em qualquer lugar da tela agora e mexa o mouse para controlar as ondas e a iluminação';
+instructionPhrase.innerHTML = 'Clique <a href="#sub">aqui</a> agora e mexa o mouse para controlar as ondas e a iluminação';
   
 let audio = new Audio ('./assets/musica/audio2.mp3');
 let audio2 = new Audio ('./assets/musica/audio.mp3');
@@ -10,6 +10,7 @@ let tocando = 0;
 let timeForward = 0.0;
 let frequencyData;
 let estouradao = 1.0;
+let testRequest = false;
 
 function playAudio(){
   if (tocando != 1){
@@ -113,7 +114,6 @@ function runAll(){
   
     const playpauseElem = document.querySelector('.playpause');
     const inputElem = document.querySelector('.divcanvas');
-    let testRequest = false;
     inputElem.addEventListener('mousemove', testRequestFun);
     //inputElem.addEventListener('mouseout', cancelFrame);
 
