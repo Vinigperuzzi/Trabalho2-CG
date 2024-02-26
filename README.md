@@ -2,7 +2,7 @@
 Este projeto é resultado da entrega da disciplina de Computação Gráfica no ano de 2023. Nele, exploramos a técnica de Ray Marching para criar uma cena envolvente e interativa.
 
 ## Descrição
-A técnica de Ray Marching, similar ao Ray Tracing, calcula a distância dos raios em relação a objetos próximos, proporcionando efeitos visuais intrigantes. Neste trabalho, construímos uma cena com um oceano dinâmico, onde a manipulação do mouse permite ajustar a iluminação para simular transições entre dia e noite.
+A técnica de Ray Marching, similar ao Ray Tracing, calcula a distância dos raios em relação a objetos próximos, proporcionando efeitos visuais intrigantes. Neste trabalho, construi uma cena com um oceano dinâmico, onde a manipulação do mouse permite ajustar a iluminação para simular transições entre dia e noite.
 
 ## Funcionalidades
 Controle de Iluminação: Posicionando o mouse horizontalmente, é possível manipular a iluminação para transições dinâmicas entre o dia e a noite.
