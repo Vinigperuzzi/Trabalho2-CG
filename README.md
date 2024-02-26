@@ -1,7 +1,21 @@
-# Trabalho2-CG
-Fazer alguma coisa utilizando a técnica de Ray Marching.
+# Trabalho2-CG - Cena Interativa com Ray Marching
+Este projeto é resultado da entrega da disciplina de Computação Gráfica no ano de 2023. Nele, exploramos a técnica de Ray Marching para criar uma cena envolvente e interativa.
 
-A técnica de ray marching se assemelha à técnica de ray tracing, porém ela pega a distância os raios em relação aos objetos próximos, o que leva  efeitos interessantes.
-Nesse trabalho, é feita uma cena com o oceano, em que pode-se manipular iluminação de dia e noite posicionando o mouse horizontalmente ou mudar a intensidade das ondas do mar com a posição do mouse verticalmente.
-Essa foi a entrega da disciplina de CG no ano de 2023, mas ainda há a vontade de aumentar esse projeto e de colocar mais eleentos nessa cena, porém dado o curto tempo o final do semestre e das reduzidas 15 semanas do calendário, não foi possível. Mas com certeza, futuramente esse projeto irá se expandir.
-Ainda há outras duas funções nos icones das caixas de som, uma delas é uma função que permite controlar o mar e as cores conforme a frequência da música, e a outra é simplesmente contemplar um dia no oceano com uma musiquinha suave, a música vai tocando e o dia vai passando, sinta-se à vontade para relaxar!!
+## Descrição
+A técnica de Ray Marching, similar ao Ray Tracing, calcula a distância dos raios em relação a objetos próximos, proporcionando efeitos visuais intrigantes. Neste trabalho, construímos uma cena com um oceano dinâmico, onde a manipulação do mouse permite ajustar a iluminação para simular transições entre dia e noite.
+
+## Funcionalidades
+Controle de Iluminação: Posicionando o mouse horizontalmente, é possível manipular a iluminação para transições dinâmicas entre o dia e a noite.
+
+###Intensidade das Ondas: A posição vertical do mouse influencia a intensidade das ondas do mar, criando um ambiente ainda mais imersivo.
+
+###Música e Cores Sincronizadas: Duas funcionalidades nos ícones das caixas de som permitem sincronizar as ondas do mar e as cores com a frequência da música, proporcionando uma experiência sensorial única.
+
+###Relaxamento à Beira-Mar: A última função permite desfrutar de um momento tranquilo à beira-mar, com uma trilha sonora suave que acompanha o ciclo do dia.
+
+##Futuro do Projeto
+Embora a entrega inicial tenha ocorrido no final do semestre, há planos para expandir este projeto no futuro. Com mais tempo, pretende-se adicionar elementos adicionais à cena, proporcionando uma experiência ainda mais rica e envolvente.
+
+Sinta-se à vontade para acessar o projeto [aqui](https://vinigperuzzi.github.io/Trabalho2-CG/#sub) e mergulhar nessa cena interativa!
+
+### Vinigperuzzi
