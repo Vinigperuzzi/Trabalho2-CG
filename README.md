@@ -18,4 +18,5 @@ Embora a entrega inicial tenha ocorrido no final do semestre, há planos para ex
 
 Sinta-se à vontade para acessar o projeto [aqui](https://vinigperuzzi.github.io/Trabalho2-CG/#sub) e mergulhar nessa cena interativa!
 
-### Vinigperuzzi
+Happy Coding! 
+### Vinigperuzzi 🧙‍♂️
